@@ -1,0 +1,17 @@
+------APPI DOKCER COMPOST------
+docker compose up -d flask_db 
+docker-compose build
+docker compose up --build  flask_app
+
+------JENKINS------
+docker pull jenkins/jenkins:lts ---crear la imagen
+docker run --rm -u root -p 8080:8080 -v jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins_server jenkins/jenkins:lts --crear contenedor
+docker exec -it jenkins_server bash ---Para abrir la consola del jenkins 
+apt-get update ---Dentro de la consola para actualizar los archivos
+apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common --Instalar docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -   ---instalar docker
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" -----instalar docker
+apt-get update ---actualizar los archivos
+apt-get install -y docker-ce docker-ce-cli containerd.io   ---Instalar docker en el jenkins 
+exit
+
